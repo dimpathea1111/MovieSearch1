@@ -3,7 +3,19 @@ package ui;
 public class UI {
 
     public static void header() {
-        System.out.println("\n================ MOVIE SEARCH ENGINE ================\n");
+//        System.out.println("\n================ MOVIE SEARCH ENGINE ================\n");
+        System.out.println("""
+                
+                ▗▄ ▄▖            █             ▗▄▖                     ▗▖  \s
+                ▐█ █▌            ▀            ▗▛▀▜                     ▐▌  \s
+                ▐███▌ ▟█▙ ▐▙ ▟▌ ██   ▟█▙      ▐▙    ▟█▙  ▟██▖ █▟█▌ ▟██▖▐▙██▖
+                ▐▌█▐▌▐▛ ▜▌ █ █   █  ▐▙▄▟▌      ▜█▙ ▐▙▄▟▌ ▘▄▟▌ █▘  ▐▛  ▘▐▛ ▐▌
+                ▐▌▀▐▌▐▌ ▐▌ ▜▄▛   █  ▐▛▀▀▘        ▜▌▐▛▀▀▘▗█▀▜▌ █   ▐▌   ▐▌ ▐▌
+                ▐▌ ▐▌▝█▄█▘ ▐█▌ ▗▄█▄▖▝█▄▄▌     ▐▄▄▟▘▝█▄▄▌▐▙▄█▌ █   ▝█▄▄▌▐▌ ▐▌
+                ▝▘ ▝▘ ▝▀▘   ▀  ▝▀▀▀▘ ▝▀▀       ▀▀▘  ▝▀▀  ▀▀▝▘ ▀    ▝▀▀ ▝▘ ▝▘
+                
+                
+                """);
     }
 
     public static void footer(int page, int total) {

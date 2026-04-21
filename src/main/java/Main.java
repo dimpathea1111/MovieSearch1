@@ -21,7 +21,6 @@ public class Main {
 
             MovieResponse response = service.getTMDBMovie(page);
 
-            // ✅ Safety check
             if (response == null || response.getResults() == null) {
                 System.out.println("API error or empty response!");
                 continue;
