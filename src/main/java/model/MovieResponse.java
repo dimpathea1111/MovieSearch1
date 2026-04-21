@@ -33,6 +33,11 @@ public class MovieResponse {
 
     private Integer page;
 
+//    private List<Movie>results;
+//    private Integer total_page;
+//    private  Integer total_results;
+//
+//
 
     @JsonProperty("results")
     private List<Movie> results;
