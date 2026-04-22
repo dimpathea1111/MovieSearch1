@@ -1,39 +1,3 @@
-//package ui;
-//
-//public class UI {
-//
-//    public static void header() {
-////        System.out.println("\n================ MOVIE SEARCH ENGINE ================\n");
-//        System.out.println("""
-//
-//                ▗▄ ▄▖            █             ▗▄▖                     ▗▖  \s
-//                ▐█ █▌            ▀            ▗▛▀▜                     ▐▌  \s
-//                ▐███▌ ▟█▙ ▐▙ ▟▌ ██   ▟█▙      ▐▙    ▟█▙  ▟██▖ █▟█▌ ▟██▖▐▙██▖
-//                ▐▌█▐▌▐▛ ▜▌ █ █   █  ▐▙▄▟▌      ▜█▙ ▐▙▄▟▌ ▘▄▟▌ █▘  ▐▛  ▘▐▛ ▐▌
-//                ▐▌▀▐▌▐▌ ▐▌ ▜▄▛   █  ▐▛▀▀▘        ▜▌▐▛▀▀▘▗█▀▜▌ █   ▐▌   ▐▌ ▐▌
-//                ▐▌ ▐▌▝█▄█▘ ▐█▌ ▗▄█▄▖▝█▄▄▌     ▐▄▄▟▘▝█▄▄▌▐▙▄█▌ █   ▝█▄▄▌▐▌ ▐▌
-//                ▝▘ ▝▘ ▝▀▘   ▀  ▝▀▀▀▘ ▝▀▀       ▀▀▘  ▝▀▀  ▀▀▝▘ ▀    ▝▀▀ ▝▘ ▝▘
-//
-//
-//                """);
-//    }
-//
-//    public static void footer(int page, int total) {
-//        System.out.println("\nPage " + page + " of " + total + " | Total Results: ...");
-//
-//        System.out.println("""
-//                [n] Next Page      [p] Previous Page
-//                [g] Go to Page     [md] Movie Detail
-//                [b] Back           [e] Exit
-//                """);
-//
-//        System.out.print("[-] Choose an option: ");
-//    }
-//
-//    public static void movieDetailHeader() {
-//        System.out.println("\n================ MOVIE INFORMATION ================\n");
-//    }
-//}
 
 
 package ui;
@@ -49,12 +13,36 @@ public class UI {
     private int page = 1;
 
     public void start() {
-        System.out.println("▗▄ ▄▖  MOVIE APP SEARCH  ▗▄▖");
+        System.out.println("""
+
+                ▗▄ ▄▖            █             ▗▄▖                     ▗▖  \s
+                ▐█ █▌            ▀            ▗▛▀▜                     ▐▌  \s
+                ▐███▌ ▟█▙ ▐▙ ▟▌ ██   ▟█▙      ▐▙    ▟█▙  ▟██▖ █▟█▌ ▟██▖▐▙██▖
+                ▐▌█▐▌▐▛ ▜▌ █ █   █  ▐▙▄▟▌      ▜█▙ ▐▙▄▟▌ ▘▄▟▌ █▘  ▐▛  ▘▐▛ ▐▌
+                ▐▌▀▐▌▐▌ ▐▌ ▜▄▛   █  ▐▛▀▀▘        ▜▌▐▛▀▀▘▗█▀▜▌ █   ▐▌   ▐▌ ▐▌
+                ▐▌ ▐▌▝█▄█▘ ▐█▌ ▗▄█▄▖▝█▄▄▌     ▐▄▄▟▘▝█▄▄▌▐▙▄█▌ █   ▝█▄▄▌▐▌ ▐▌
+                ▝▘ ▝▘ ▝▀▘   ▀  ▝▀▀▀▘ ▝▀▀       ▀▀▘  ▝▀▀  ▀▀▝▘ ▀    ▝▀▀ ▝▘ ▝▘
+
+
+                """);
+
+
+        System.out.println("=========  MOVIE APP SEARCH  ==========");
+
+
         System.out.print("[-] Enter movie title: ");
         query = sc.nextLine();
         refresh();
         while (true) {
-            System.out.println("\n[n]Next [p]Prev [g]Go [md]Detail [e]Exit");
+
+            System.out.println("""
+                    [n] Next Page
+                    [p] Previous Page
+                    [g] Go To
+                    [md] Movie Detail 
+                    [b] Back
+                    [e] Exit
+                    """);
             System.out.print("[-] Choose an option: ");
             String opt = sc.nextLine().toLowerCase();
             switch (opt) {
@@ -67,14 +55,43 @@ public class UI {
                     MovieDetail d = service.getMovieDetails(Integer.parseInt(sc.nextLine()));
                     if (d != null) TableRenderer.renderDetails(d);
                 }
+                case "b"->{
+                    page=1;
+                     refresh();
+                }
+
                 default -> { query = opt; page = 1; refresh(); }
             }
         }
     }
+
+
+//    private void refresh() {
+//        MovieResponse r = service.searchMovies(query, page);
+//        if (r != null && r.getResults() != null) {
+//            TableRenderer.renderList(r.getResults(), page, r.getTotalPages(), r.getTotalResults());
+//        }
+//    }
+
+
     private void refresh() {
+        if (query == null || query.trim().isEmpty()) {
+            System.out.println("Please enter a movie name!");
+            return;
+        }
+
         MovieResponse r = service.searchMovies(query, page);
         if (r != null && r.getResults() != null) {
-            TableRenderer.renderList(r.getResults(), page, r.getTotalPages(), r.getTotalResults());
+            TableRenderer.renderList(
+                    r.getResults(),
+                    page,
+                    r.getTotalPages(),
+                    r.getTotalResults()
+            );
+        } else {
+            System.out.println("No results found!");
         }
     }
+
+
 }

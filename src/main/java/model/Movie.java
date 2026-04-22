@@ -31,10 +31,5 @@ public class Movie {
     public String getFormattedDate() {
         return (releaseDate == null || releaseDate.isEmpty()) ? "Unknown" : releaseDate;
     }
-//
-//    @JsonProperty("release_date")
-//    private String releaseDate;
-//
-//    @JsonProperty("vote_average")
-//    private double voteAverage;
+
 }

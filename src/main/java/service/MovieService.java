@@ -20,13 +20,9 @@ import model.MovieDetail;
 import model.MovieResponse;
 
 public interface MovieService {
-    /**
-     * Searches for movies based on a title string and page number.
-     */
+
     MovieResponse searchMovies(String query, int page);
 
-    /**
-     * Fetches full details for a single movie using its unique ID.
-     */
+
     MovieDetail getMovieDetails(int id);
 }
